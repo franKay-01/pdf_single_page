@@ -11,7 +11,6 @@ const useFunctions = () => {
   const getCountryCities = async (param) => {
     let route = `get_city_list?country=${param}`
     const { data } = await executeGet(route);
-    console.log("ROUTE "+JSON.stringify(data))
     return {resp_code: data.response_code, data: data.response_data}
   }
 
