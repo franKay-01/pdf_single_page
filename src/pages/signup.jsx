@@ -109,13 +109,14 @@ export default function SignUp(){
   const changeUsername = async (e) => {
     setUsername(e.target.value)
     let {username_resp_code, username_resp_desc} = await checkUsename(e.target.value)
-    if (!username_resp_code){
+    console.log("USERNAME CODE " + username_resp_code)
+    if (username_resp_code){
+      setError('')
+      setIsUsernameAvailable(true)
+    }else{
       setError(username_resp_desc)
       setIsUsernameAvailable(false)
       ShowToast('error', username_resp_desc)
-    }else{
-      setError('')
-      setIsUsernameAvailable(true)
     }
   }
 
@@ -614,7 +615,7 @@ export default function SignUp(){
                 <>
                   {isUsernameAvailable ?
                     <button onClick={()=> createAccount()} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
-                      <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
+                      <p class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</p>
                     </button>
                     :
                     <button className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12 lg:disabled'>

@@ -15,7 +15,6 @@ export default function Home(){
 
   const getAllPackageList = async () => {
     const allPackages = await getPackageLists();
-    console.log("PACKAGES " + JSON.stringify(allPackages))
     if (allPackages.length > 0){
       setPackages(allPackages)
     }
