@@ -37,7 +37,7 @@ export default function SignUp(){
   const [pageTwo, setPageTwo] = useState(false)
   const [pageThree, setPageThree] = useState(false)
   const [enabled, setEnabled] = useState(true)
-  const [accountEnabled, setAccountEnabled] = useState(false)
+  const [accountEnabled, setAccountEnabled] = useState(true)
 
   const [beneficiaryDetails, setBeneficiaryDetails] = useState([])
   
@@ -256,7 +256,7 @@ export default function SignUp(){
 
     const {resp_code, checkout_url, response_message} = await submitCompanySubscription(params);
     if (resp_code === '000'){
-      ShowToast('success', "Records successfully created")
+      ShowToast('success', "Records creation pending. Please make payment to continue.")
       setTimeout(function(){
         window.open(checkout_url, '_blank');
       }, 1000);
@@ -310,8 +310,16 @@ export default function SignUp(){
             <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">Here at Landwind we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
             <p class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">{packageName} Subscription @ ${price}</p>
           </div>
-         
-          <div class="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
+        { isLoading ? 
+          <>
+            <span className="spinner-position spinner-position-alt">
+              <div class="w-6 h-6 rounded-full animate-spin
+                border border-solid border-yellow-500 border-t-transparent"></div>
+            </span>
+          </>
+          :
+          <>
+            <div class="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
             {/* <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">A. Company Details</h2> */}
             <div className='lg:grid lg:grid-cols-2 mt-4'>
               <div>
@@ -329,309 +337,299 @@ export default function SignUp(){
                 }
               </div>
             </div>
-          </div>
-          <div class="space-y-8 border border-gray-100 shadow lg:mb-8 lg:grid lg:grid-cols-1 sm:gap-6 xl:gap-10 lg:space-y-0">
-            <div className="grid main-right-padding">              
-              { pageOne? 
-                <div className="lg:grid lg:grid-cols-3">
-                  <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label">Company name</p>
-                          <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeCompanyName} value={companyName} placeholder="Company name" type="text"/>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label mb-4">Country</p>
-                          <Autocomplete
-                            options={countries}
-                            getOptionLabel={option => option}
-                            open={countryOpen}
-                            onOpen={() => {
-                              setCountryOpen(true);
-                            }}
-                            onClose={() => {
-                              setCountryOpen(false);
-                            }}
-                            value={countryValue}
-                            sx={{ width: '300px' }}
-                            loading={countryLoading}
-                            onChange={(event, newValue) => {
-                              changeUserChoice(newValue);
-                            }}
-                            renderInput={params => (
-                              <TextField {...params} variant="outlined" />
-                            )}
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label mb-4">City</p>
-                          
-                          <Autocomplete
-                            options={cities}
-                            getOptionLabel={option => option}
-                            open={open}
-                            onOpen={() => {
-                              setOpen(true);
-                            }}
-                            onClose={() => {
-                              setOpen(false);
-                            }}
-                            value={value}
-                            sx={{ width: '300px' }}
-                            loading={loading}
-                            onChange={(event, newValue) => {
-                              setValue(newValue);
-                            }}
-                            renderInput={params => (
-                              <TextField {...params} variant="outlined" />
-                            )}
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label mb-4">Industry</p>
-                          <Autocomplete
-                            options={industries}
-                            getOptionLabel={option => option.label}
-                            open={industryOpen}
-                            onOpen={() => {
-                              setIndustryOpen(true);
-                            }}
-                            onClose={() => {
-                              setIndustryOpen(false);
-                            }}
-                            value={industryValue}
-                            sx={{ width: '300px' }}
-                            loading={industryLoading}
-                            onChange={(event, newValue) => {
-                              setIndustryValue(newValue);
-                            }}
-                            renderInput={params => (
-                              <TextField {...params} variant="outlined" />
-                            )}
-                          />
-                        </div>
-                      </li>
-                    </ul>
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label">Email</p>
-                          <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeEmail} value={email} placeholder="Email" type="text"/>
-                        </div>
-                      </li>
-                    </ul>
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label mb-4">Auto renewal?</p>
-                          <Switch onChange={handleChange} checked={enabled} />                          
-                        </div>
-                      </li>
-                    </ul>
-                    
-                  </div>
-                  <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label mb-4">Phone</p>
-                          <PhoneInput
-                            containerClassName="intl-tel-input"
-                            inputClassName="form-control"
-                            type="tel"
-                            defaultCountry="us"
-                            onPhoneNumberChange={handlePhoneChange}
-                            value={phoneNumber}
-                          />
-                            {/* <input className="get-started-input mt-4" onChange={changePhone} value={phone} placeholder="Phone" type="text"/> */}
-                        </div>
-                      </li>
-                    </ul>
-                    <ul role="list" class="mb-8 space-y-4 text-left">
-                      <li class="flex items-center space-x-3">
-                        <div className="flex flex-col">
-                          <p className="get-started-text-label">Address</p>
-                          <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeAddress} value={address} placeholder="Address" type="text"/>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              :
-              null
-              }
-
-              { pageTwo? 
-                <>
-                  <div className="lg:grid lg:grid-cols-1">
-                    <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-2 dark:bg-gray-800 dark:text-white">
+            </div>
+            <div class="space-y-8 border border-gray-100 shadow lg:mb-8 lg:grid lg:grid-cols-1 sm:gap-6 xl:gap-10 lg:space-y-0">
+              <div className="grid main-right-padding">              
+                { pageOne? 
+                  <div className="lg:grid lg:grid-cols-3">
+                    <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
                       <ul role="list" class="mb-8 space-y-4 text-left">
                         <li class="flex items-center space-x-3">
                           <div className="flex flex-col">
-                            <p className="get-started-text-label">Do you wish to create a user account?</p>
-                            <Switch onChange={handleAccountChange} checked={accountEnabled} />  
+                            <p className="get-started-text-label">Company name</p>
+                            <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeCompanyName} value={companyName} placeholder="Company name" type="text"/>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label mb-4">Country</p>
+                            <Autocomplete
+                              options={countries}
+                              getOptionLabel={option => option}
+                              open={countryOpen}
+                              onOpen={() => {
+                                setCountryOpen(true);
+                              }}
+                              onClose={() => {
+                                setCountryOpen(false);
+                              }}
+                              value={countryValue}
+                              sx={{ width: '300px' }}
+                              loading={countryLoading}
+                              onChange={(event, newValue) => {
+                                changeUserChoice(newValue);
+                              }}
+                              renderInput={params => (
+                                <TextField {...params} variant="outlined" />
+                              )}
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label mb-4">City</p>
+                            
+                            <Autocomplete
+                              options={cities}
+                              getOptionLabel={option => option}
+                              open={open}
+                              onOpen={() => {
+                                setOpen(true);
+                              }}
+                              onClose={() => {
+                                setOpen(false);
+                              }}
+                              value={value}
+                              sx={{ width: '300px' }}
+                              loading={loading}
+                              onChange={(event, newValue) => {
+                                setValue(newValue);
+                              }}
+                              renderInput={params => (
+                                <TextField {...params} variant="outlined" />
+                              )}
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label mb-4">Industry</p>
+                            <Autocomplete
+                              options={industries}
+                              getOptionLabel={option => option.label}
+                              open={industryOpen}
+                              onOpen={() => {
+                                setIndustryOpen(true);
+                              }}
+                              onClose={() => {
+                                setIndustryOpen(false);
+                              }}
+                              value={industryValue}
+                              sx={{ width: '300px' }}
+                              loading={industryLoading}
+                              onChange={(event, newValue) => {
+                                setIndustryValue(newValue);
+                              }}
+                              renderInput={params => (
+                                <TextField {...params} variant="outlined" />
+                              )}
+                            />
+                          </div>
+                        </li>
+                      </ul>
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label">Email</p>
+                            <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeEmail} value={email} placeholder="Email" type="text"/>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label mb-4">Auto renewal?</p>
+                            <Switch onChange={handleChange} checked={enabled} />                          
+                          </div>
+                        </li>
+                      </ul>
+                      
+                    </div>
+                    <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label mb-4">Phone</p>
+                            <PhoneInput
+                              containerClassName="intl-tel-input"
+                              inputClassName="form-control"
+                              type="tel"
+                              defaultCountry="us"
+                              onPhoneNumberChange={handlePhoneChange}
+                              value={phoneNumber}
+                            />
+                              {/* <input className="get-started-input mt-4" onChange={changePhone} value={phone} placeholder="Phone" type="text"/> */}
+                          </div>
+                        </li>
+                      </ul>
+                      <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                          <div className="flex flex-col">
+                            <p className="get-started-text-label">Address</p>
+                            <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeAddress} value={address} placeholder="Address" type="text"/>
                           </div>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div className="lg:grid lg:grid-cols-3">
-                    {accountEnabled ? 
-                      <>
-                        <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">User's first name</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserFirstName} value={userFirstName} placeholder="User's name" type="text"/>
-                              </div>
-                            </li>
-                          </ul>
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">User's last name</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserLastName} value={userLastName} placeholder="User's name" type="text"/>
-                              </div>
-                            </li>
-                          </ul>
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">User's email</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserEmail} value={userEmail} placeholder="Email" type="text"/>
-                              </div>
-                            </li>
-                          </ul>                          
-                        </div>
-                        <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label mb-4">Gender</p>
-                                <Autocomplete
-                                  options={sex}
-                                  getOptionLabel={option => option}
-                                  open={sexOpen}
-                                  onOpen={() => {
-                                    setSexOpen(true);
-                                  }}
-                                  onClose={() => {
-                                    setSexOpen(false);
-                                  }}
-                                  value={sexValue}
-                                  sx={{ width: '300px' }}
-                                  loading={sexLoading}
-                                  onChange={(event, newValue) => {
-                                    setSexValue(newValue);
-                                  }}
-                                  renderInput={params => (
-                                    <TextField {...params} variant="outlined" />
-                                  )}
-                                />
-                              </div>
-                            </li>
-                          </ul>
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">Password</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changePassword} value={password} placeholder="Password" type="password"/>
-                              </div>
-                            </li>
-                          </ul>
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">Confirm Password</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeConfirmPassword} value={confirmPassword} placeholder="Confirm Password" type="password"/>
-                                <h1 className='phone-number-instruction'>{passwordMismatch}</h1>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
-                         
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">User's phone number</p>
-                                <PhoneInput
-                                  containerClassName="intl-tel-input"
-                                  inputClassName="form-control"
-                                  type="tel"
-                                  defaultCountry="us"
-                                  onPhoneNumberChange={handleUserPhoneChange}
-                                  value={userPhone}
-                                />                              
-                              </div>
-                            </li>
-                          </ul>
-                          <ul role="list" class="mb-8 space-y-4 text-left">
-                            <li class="flex items-center space-x-3">
-                              <div className="flex flex-col">
-                                <p className="get-started-text-label">Username</p>
-                                <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUsername} value={username} placeholder="Username" type="text"/>
-                                <h1 className='phone-number-instruction'>{error}</h1>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </>
-                      :
-                      null
-                    }
-                  </div>
-                </>
-              :
-              null
-              }
+                :
+                null
+                }
+
+                { pageTwo? 
+                  <>
+                    <div className="lg:grid lg:grid-cols-3">
+                      {accountEnabled ? 
+                        <>
+                          <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">User's first name</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserFirstName} value={userFirstName} placeholder="User's name" type="text"/>
+                                </div>
+                              </li>
+                            </ul>
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">User's last name</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserLastName} value={userLastName} placeholder="User's name" type="text"/>
+                                </div>
+                              </li>
+                            </ul>
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">User's email</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUserEmail} value={userEmail} placeholder="Email" type="text"/>
+                                </div>
+                              </li>
+                            </ul>                          
+                          </div>
+                          <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label mb-4">Gender</p>
+                                  <Autocomplete
+                                    options={sex}
+                                    getOptionLabel={option => option}
+                                    open={sexOpen}
+                                    onOpen={() => {
+                                      setSexOpen(true);
+                                    }}
+                                    onClose={() => {
+                                      setSexOpen(false);
+                                    }}
+                                    value={sexValue}
+                                    sx={{ width: '300px' }}
+                                    loading={sexLoading}
+                                    onChange={(event, newValue) => {
+                                      setSexValue(newValue);
+                                    }}
+                                    renderInput={params => (
+                                      <TextField {...params} variant="outlined" />
+                                    )}
+                                  />
+                                </div>
+                              </li>
+                            </ul>
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">Password</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changePassword} value={password} placeholder="Password" type="password"/>
+                                </div>
+                              </li>
+                            </ul>
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">Confirm Password</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeConfirmPassword} value={confirmPassword} placeholder="Confirm Password" type="password"/>
+                                  <h1 className='phone-number-instruction'>{passwordMismatch}</h1>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="max-w-lg p-6 mx-auto text-center text-gray-900 bg-white rounded-lg xl:p-8 dark:bg-gray-800 dark:text-white">
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label mb-2">User's phone number</p>
+                                  <PhoneInput
+                                    containerClassName="intl-tel-input"
+                                    inputClassName="form-control"
+                                    type="tel"
+                                    defaultCountry="us"
+                                    onPhoneNumberChange={handleUserPhoneChange}
+                                    value={userPhone}
+                                  />
+                                </div>
+                              </li>
+                            </ul>
+                            <ul role="list" class="mb-8 space-y-4 text-left">
+                              <li class="flex items-center space-x-3">
+                                <div className="flex flex-col">
+                                  <p className="get-started-text-label">Username</p>
+                                  <input className="get-started-input mt-4 outline-offset-1 outline-blue-500" onChange={changeUsername} value={username} placeholder="Username" type="text"/>
+                                  <h1 className='phone-number-instruction'>{error}</h1>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </>
+                        :
+                        null
+                      }
+                    </div>
+                  </>
+                :
+                null
+                }
+              </div>
             </div>
-            
-          </div>
-          <div className='flex justify-center mt-12'>
-            { pageOne? 
-              <button onClick={()=>changePageOne("2")} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
-                <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Next (1/2)</a>
-              </button>
-            : null
-            }
-            { pageTwo? 
-              accountEnabled ? 
-                <>
-                  {isUsernameAvailable ?
-                    <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
-                      <p class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</p>
-                    </button>
-                    :
-                    <button className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12 lg:disabled'>
-                      <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
-                    </button>
-                  }
-                </>
-                : 
-                <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
-                  <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
+            <div className='flex justify-center mt-12'>
+              { pageOne ? 
+                <button onClick={()=>changePageOne("2")} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
+                  <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Next (1/2)</a>
                 </button>
               : null
-            }
-          </div> 
+              }
+              { pageTwo ? 
+                accountEnabled ? 
+                  <>
+                    {isUsernameAvailable ?
+                      <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
+                        <p class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</p>
+                      </button>
+                      :
+                      <button className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12 lg:disabled'>
+                        <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
+                      </button>
+                    }
+                  </>
+                  : 
+                  <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
+                    <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
+                  </button>
+                : null
+              }
+            </div> 
+          </>
+        }
+         
+
         </div>
       </section>
     </>

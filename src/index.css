@@ -2489,3 +2489,15 @@ input:checked + .toggle-bg {
     line-height: 1;
   }
 }
+
+.spinner-position-alt{
+  margin: auto !important;
+}
+
+.spinner-position{
+  margin: 10rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
