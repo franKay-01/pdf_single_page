@@ -257,13 +257,17 @@ export default function SignUp(){
     const {resp_code, checkout_url, response_message} = await submitCompanySubscription(params);
     if (resp_code === '000'){
       ShowToast('success', "Records creation pending. Please make payment to continue.")
+      setIsLoading(false)
+
       setTimeout(function(){
         window.open(checkout_url, '_blank');
       }, 1000);
+
       setTimeout(function(){
         window.location.href = '/'
       }, 3000);
     }else{
+      setIsLoading(false)
       ShowToast('error', response_message)      
     }
   }
@@ -312,10 +316,9 @@ export default function SignUp(){
           </div>
           { isLoading ? 
             <>
-              <span className="spinner-position spinner-position-alt">
-                <div class="w-6 h-6 rounded-full animate-spin
-                  border border-solid border-yellow-500 border-t-transparent"></div>
-              </span>
+              <div className="spinner-container">
+                <div className="spinner"></div>
+              </div>
             </>
             :
             <>
