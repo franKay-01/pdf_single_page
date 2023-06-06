@@ -254,7 +254,7 @@ export default function SignUp(){
       "enrollment_type": "S"
     }
 
-    const {resp_code, checkout_url} = await submitCompanySubscription(params);
+    const {resp_code, checkout_url, response_message} = await submitCompanySubscription(params);
     if (resp_code === '000'){
       ShowToast('success', "Records successfully created")
       setTimeout(function(){
@@ -263,6 +263,8 @@ export default function SignUp(){
       setTimeout(function(){
         window.location.href = '/'
       }, 3000);
+    }else{
+      ShowToast('error', response_message)      
     }
   }
 
@@ -614,7 +616,7 @@ export default function SignUp(){
               accountEnabled ? 
                 <>
                   {isUsernameAvailable ?
-                    <button onClick={()=> createAccount()} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
+                    <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
                       <p class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</p>
                     </button>
                     :
@@ -624,7 +626,7 @@ export default function SignUp(){
                   }
                 </>
                 : 
-                <button onClick={()=> createAccount()} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
+                <button onClick={createAccount} className='max-w-screen-md mx-auto mb-8 text-center lg:mb-12'>
                   <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Submit Details</a>
                 </button>
               : null

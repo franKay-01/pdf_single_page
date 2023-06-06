@@ -32,7 +32,7 @@ const useFunctions = () => {
 
   const submitCompanySubscription = async (param) => {
     const {data} = await executeReq('submit_company_subscription', param)
-    return {resp_code: data.response_code, checkout_url: data.checkout_url}
+    return {resp_code: data.response_code, checkout_url: data.checkout_url, response_message: data.response_message}
   }
 
   const checkUsername = async (param) => {
