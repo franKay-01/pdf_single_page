@@ -1,5 +1,5 @@
 {
-  "name": "single_landing_page",
+  "name": "one_plan_pdf_page",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +16,7 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "flowbite": "^1.6.5",
+    "html2pdf.js": "^0.10.1",
     "install": "^0.13.0",
     "jquery": "^3.6.4",
     "npm": "^9.6.6",

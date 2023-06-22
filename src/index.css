@@ -78,6 +78,14 @@ abbr:where([title]) {
           text-decoration: underline dotted;
 }
 
+.underline{
+  text-decoration: underline
+}
+
+
+.special-font-size{
+  font-size: 18px !important;
+}
 /*
 Remove the default font size and weight for headings.
 */
@@ -153,20 +161,26 @@ sup {
   top: -0.5em;
 }
 
+.table-w{
+  width: 100% !important;
+}
+
+table {
+  width: 100%;
+  border-spacing: 30px;
+}
+
 /*
 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
 3. Remove gaps between table borders by default.
 */
-
+/* 
 table {
   text-indent: 0;
-  /* 1 */
   border-color: inherit;
-  /* 2 */
   border-collapse: collapse;
-  /* 3 */
-}
+} */
 
 /*
 1. Change the font styles in all browsers.
@@ -1159,6 +1173,10 @@ input:checked + .toggle-bg {
   display: block;
 }
 
+.mt-alt{
+  margin-top: 3rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -1377,6 +1395,11 @@ input:checked + .toggle-bg {
 
 .gap-8 {
   gap: 2rem;
+}
+
+td {
+  text-align: left;
+  padding: 5px;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -2531,6 +2554,130 @@ input:checked + .toggle-bg {
   }
 }
 
+.icon-width{
+  width: 4rem;
+  height: 4rem;
+}
 
+.heading-color{
+  color: #133B69;
+}
+
+.text-bg-color{
+  background-color: #133B69;
+}
+
+.text-bg-color-alt{
+  background-color: #f0f8ffd1 !important;
+  color: #133B69 !important;
+}
+
+.text-width{
+  width: 10rem;
+  margin: auto;
+}
+
+.text-border-design{
+  margin: auto;
+  width: 100%;
+  /* height: 3rem; */
+  color: black;
+  /* border: solid 1px black;
+  border-radius: 5px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.text-bg-design{
+  width: fit-content;
+  /* padding: 1rem; */
+  color: #133B69;
+  border-radius: 20px;
+}
+
+.section-margin{
+  margin-top: 4rem;
+}
+
+.button-margin{
+  margin-left: 2rem;
+}
+
+.p-margin{
+  margin-right: 0.5rem;
+}
+
+.no-record-position{
+  margin: 20rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-bg-design-alt-2{
+  width: 29.7% !important;
+}
+
+.table-bg-design-alt{
+  width: 20% !important;
+}
+
+.cert-design{
+  width: 10rem;
+}
+
+.signature-margin{
+  margin-top: 5rem !important
+}
+
+.table-text-style-alt{
+  color: #133B69 !important;
+  font-weight: 500 !important;
+}
+
+.table-text-style{
+  color: #6b7280;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.table-bene-bg-design{
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  color: black;
+  background-color: #fff;
+  border: solid 1px #afabab;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.table-bg-design{
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  color: black;
+  background-color: #ededed;
+  border: solid 1px #afabab;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.text-margin{
+  margin-left: 5rem;
+}
+
+.vertical-hr {
+  border: none;
+  border-left: 2px solid black;
+  height: 75px; /* Adjust the height as needed */
+}
 
 
