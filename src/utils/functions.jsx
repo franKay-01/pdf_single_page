@@ -9,7 +9,6 @@ const useFunctions = () => {
       return {status: data.status, pension_data: data.data, response_message: data.response_message}
     }else{
       return {status: data.status, response_message: data.response_message}
-
     }
   }
 

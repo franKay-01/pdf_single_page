@@ -31,7 +31,7 @@ export default function Home(){
         setSubInfo(pension_data['subscriber']['subscriber_info'])
         setSubLegalDetails(pension_data['subscriber']['subscriber_legal'])
   
-        // generatePDF()
+        generatePDF()
       }
     }else{
       setNoData(false)
