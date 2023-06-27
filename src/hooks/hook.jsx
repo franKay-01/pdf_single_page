@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from "axios"
 
 const useAxios = () => {
-  const BASE_URL = 'http://20.228.210.19:1027/api/v1';
+  const BASE_URL = '';
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
 
