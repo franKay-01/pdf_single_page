@@ -12,7 +12,9 @@ const useAxios = () => {
 
   const executeGet = async (route) => {
     try {
-      const res = await axios.get(`${BASE_URL}/${route}`)
+      const res = await axios.get(`${BASE_URL}/${route}`, {headers: {
+        Accept: 'application/json',
+      }})
       return res
     }
     catch (err) {
