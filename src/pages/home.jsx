@@ -29,9 +29,7 @@ export default function Home(){
 
   const getPensionDetails = async () => {
     const {status, pension_data} = await getSubscriberPensionDetails(subscriber_id);
-    console.log("HERE " + JSON.stringify(pension_data))
     if (status){
-      console.log("SUBS " + JSON.stringify(pension_data['subscriber']))
       if (pension_data['beneficiaries'].length > 0){
         setSubscriberData(pension_data['beneficiaries'])
         setSubNextKin(pension_data['subscriber']['next_of_kin'])
@@ -68,9 +66,7 @@ export default function Home(){
   };
 
   const generatePDF = () => {
-    console.log("HERE")
     const element = document.getElementById('pension-pdf-id');
-    console.log(element)
     const opt = {
       // [top, right, bottom, left]
       margin: [10, 20, 0, 20],
@@ -92,7 +88,6 @@ export default function Home(){
       :
         noData ? 
           <>
-            
             <div className='grid justify-center items-center main-d-height'>
               <div>
                 <img className='header-img-width' src={LogoTitle} />

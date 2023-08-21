@@ -5,7 +5,6 @@ const useFunctions = () => {
 
   const getSubscriberPensionDetails = async (param) => {
     const {data} = await executeGet(`subscriber/inheritance?subscriber_id=${param}`)
-    console.log("FUNCTIONS " + JSON.stringify(data))
     if (data.status){
       return {status: data.status, pension_data: data.data, response_message: data.response_message}
     }else{
