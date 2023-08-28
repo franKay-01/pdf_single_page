@@ -4,6 +4,7 @@ const useFunctions = () => {
   const { executeGet, executeReq } = useAxios();
 
   const getSubscriberPensionDetails = async (param) => {
+    console.log('NODE_ENV:', process.env.NODE_ENV);
     const {data} = await executeGet(`subscriber/inheritance?subscriber_id=${param}`)
     if (data.status){
       return {status: data.status, pension_data: data.data, response_message: data.response_message}
