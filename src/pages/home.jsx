@@ -40,6 +40,7 @@ export default function Home(){
         setIsLoading(false)
       }
     }else{
+      setIsLoading(false)
       setNoData(false)
     }
   }
