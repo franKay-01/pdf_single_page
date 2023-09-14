@@ -3,10 +3,6 @@ import axios from "axios"
 
 const useAxios = () => {
   let BASE_URL = process.env.ENV_USSD_API_URL
-
-  const [error, setError] = useState(null)
-  const [isPending, setIsPending] = useState(false)
-
   /*
   Execute Req
   */
