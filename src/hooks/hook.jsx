@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from "axios"
 
 const useAxios = () => {
-  let BASE_URL = process.env.ENV_USSD_API_URL
+  let BASE_URL = "https://api.oneinc.app/v1"
   /*
   Execute Req
   */
@@ -20,14 +20,13 @@ const useAxios = () => {
   }
 
   const executeReq = async (route, body) => {
-    setIsPending(true)
 
     try {
       const res = await axios.post(`${BASE_URL}/${route}`, body)
       return res
     }
     catch (err) {
-      setError(err)
+      return(err)
     }
   }
   /*
