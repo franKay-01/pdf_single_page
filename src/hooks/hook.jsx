@@ -2,12 +2,7 @@ import { useState } from 'react'
 import axios from "axios"
 
 const useAxios = () => {
-  let BASE_URL = ""
-  if (process.env.NODE_ENV === 'production') {
-    BASE_URL = 'https://api.oneinc.app/v1';
-  }else{
-    BASE_URL = 'https://api.staging.oneinc.app/v1';
-  }
+  let BASE_URL = process.env.ENV_USSD_API_URL
 
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
