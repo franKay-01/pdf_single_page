@@ -2,9 +2,8 @@ import React, { useRef, useState } from 'react';
 import html2pdf from 'html2pdf.js';
 import { useEffect } from "react";
 import useFunctions from "../utils/functions";
-import PensionImg from '../images/pension_icon.svg'
-import ThumbsImg from '../images/thumbs.png'
 import CertImg from '../images/cert.png'
+import ArrowImg from '../images/gif/arrow.gif'
 import DeclarationTitleImg from '../images/declaration_title.png'
 import MemberTitleImg from '../images/member_title.png'
 import BeneficiariesTitleImg from '../images/beneficiaries_title.png'
@@ -93,12 +92,23 @@ export default function Home(){
               <div>
                 <img className='header-img-width' src={LogoTitle} />
               </div>  
-              <button className='pdf-download-button' onClick={generatePDF}>
-                <h1 className='pdf-download-button-text'>Download</h1>
-              </button>
+              <div className='flex flex-col space-y-12 justify-center mb-12'>
+                <h1 className='text-center uppercase'>click <b>“download”</b> to get the pdf</h1>
+                <button className='pdf-download-button' onClick={generatePDF}>
+                  <h1 className='pdf-download-button-text'>Download</h1>
+                </button>
+              </div> 
+              <div className='flex flex-col space-y-2 justify-center'>
+                <h1 className='text-center uppercase'><b>preview below</b></h1>
+
+                <div className='grid grid-row-2 justify-center'>
+                  <img src={ArrowImg} className="gif-position rotate-180" alt="arrow-down" />
+                </div>
+              </div>              
             </div>
-            
+           
             <div id='pension-pdf-id' className='p-10 collapse'>
+              <h1 className='text-center uppercase'>pdf preview</h1>
               <section class="bg-white section-margin">
                 <div class="flex justify-center px-4 pt-12">
                   <img className='header-img-width' src={LogoTitle} />
@@ -248,9 +258,7 @@ export default function Home(){
                 </div>
               </section>
             </div>
-            
-            
-            
+               
           </> : 
           <div className='no-record-position text-xl font-extrabold tracking-tight text-bg-design'>NO DATA FOUND</div>
         
