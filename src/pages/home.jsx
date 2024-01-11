@@ -59,16 +59,9 @@ export default function Home(){
     </>
   });
 
-  const pdfButtonRef = useRef(null);
-
-  const handleGeneratePDF = () => {
-    generatePDF();
-  };
-
   const generatePDF = () => {
     const element = document.getElementById('pension-pdf-id');
     const opt = {
-      // [top, right, bottom, left]
       margin: [10, 20, 0, 20],
       filename: 'declaration-certificate.pdf',
       image: { type: 'jpeg', quality: 0.98 },

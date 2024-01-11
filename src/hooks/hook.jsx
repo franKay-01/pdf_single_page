@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from "axios"
 
 const useAxios = () => {
-  let BASE_URL = "https://api.oneinc.app/v1"
+  let BASE_URL = "https://api.staging.oneinc.app/v1"
   /*
   Execute Req
   */
