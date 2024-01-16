@@ -101,7 +101,6 @@ export default function Home(){
             </div>
            
             <div id='pension-pdf-id' className='p-10 collapse'>
-              <h1 className='text-center uppercase'>pdf preview</h1>
               <section class="bg-white section-margin">
                 <div class="flex justify-center px-4 pt-12">
                   <img className='header-img-width' src={LogoTitle} />
@@ -254,7 +253,6 @@ export default function Home(){
                
           </> : 
           <div className='no-record-position text-xl font-extrabold tracking-tight text-bg-design'>NO DATA FOUND</div>
-        
       }
     </>
   )
